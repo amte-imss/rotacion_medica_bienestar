@@ -13,6 +13,8 @@
 <%@page import="model.rotacioncampo.process.DelegacionBP"%>
 <%@page import="java.util.List"%>
 <%@page import="model.rotacioncampo.beans.Delegacion"%>
+<%@page import="model.rotacioncampo.process.GradoBP"%>
+<%@page import="model.rotacioncampo.beans.Grado"%>
 <%@page import="model.rotacioncampo.process.AccesoBP"%>
 <%@page import="model.rotacioncampo.process.ConfiguracionBP"%>
 <%@page import="model.rotacioncampo.beans.Acceso"%>
@@ -38,7 +40,9 @@
     Sede sde = new Sede(ac.getDEL_CVE(),ac.getSDE_CVE());
     List<Sede> lstSde = SedeBP.consultaSede(sde);
     Especialidad esp = new Especialidad(ac.getSDE_CVE(), ac.getESP_CVE());
-    List<Especialidad> lstEsp = EspecialidadBP.consultaEspecialidad(esp);  
+    List<Especialidad> lstEsp = EspecialidadBP.consultaEspecialidad(esp);
+    Grado grad = new Grado(ac.getSDE_CVE(), ac.getESP_CVE());
+    List<Grado> lstGrad = GradoBP.consultaGrado(grad);
     Residente res = new Residente(ac.getSDE_CVE(), ac.getDEL_CVE(), ac.getESP_CVE());
     List<Residente> lstRes = ResidenteBP.consultaResidente(res);
     int columnas=4;
@@ -158,7 +162,7 @@
           <label class="control-label col-sm-2" for="ESP_CVE">Especialidad<span id="valas_003" class="form-text">*</span>:</label>
           <div class="col-sm-6">
           <span id="sESP_CVE">
-            <select class="form-control" name="SDE_CVE" id="SDE_CVE" onchange="cargaResidentes()">
+            <select class="form-control" name="ESP_CVE" id="ESP_CVE" onchange="cargaGrado();">
                 <%
                   ite=0;
                   if (lstEsp.isEmpty()){
@@ -184,6 +188,41 @@
           </span>
           <small id="val_003" class="form-text form-text-error" style="color:#D0021B; display: none"></small>
           </div>
+        </div>
+        </div>
+            
+        <div class="row">
+        <div class="form-group">    
+          <label class="control-label col-sm-2" for="GRD_NUM">Grado<span id="valas_003" class="form-text">*</span>:</label>
+          <div class="col-sm-6">
+          <span id="sGRD_NUM">
+            <select class="form-control" name="GRD_NUM" id="GRD_NUM" onchange="cargaResidentes()">
+                <%
+                  ite=0;
+                  if (lstGrad.isEmpty()){
+                %>
+                    <option value="0">CAPTURE GRADO</option>
+                <%
+                  } else {
+                    if (lstGrad.size()!=1){
+                %>
+                    <option value="0"></option>
+                <%
+                    }
+                    for (ite = 0; ite<lstGrad.size(); ite++){
+                %>
+                <option value="<%= lstGrad.get(ite).getGRD_NUM() %>"><%= lstGrad.get(ite).getGRD_NUM() %></option>
+                <%
+                    }
+                  }
+                  lstGrad = null;
+                %>
+            </select>
+
+          </span>
+          <small id="val_003" class="form-text form-text-error" style="color:#D0021B; display: none"></small>
+          </div>
+        </div>
         </div>
 
 
@@ -239,11 +278,11 @@
                             <td><%= lstRes.get(ite).getPER_AP1() %> <%= lstRes.get(ite).getPER_AP2() %> <%= lstRes.get(ite).getPER_NOM() %></td>
                             <td><% if (lstRes.get(ite).getPRD_NUM()!=0) { %><%= lstRes.get(ite).getPRD_NUM() %> <% } %></td>
                             <td><% if (lstRes.get(ite).getPRD_NUM()!=0) { %><%= lstRes.get(ite).getSDE_NOM_ROT()%> <% } %></td>
-                            <td><% if (ac.getPERFIL().equals("PROFESOR") || ac.getPERFIL().equals("ADMINISTRADOR")) { if (lstRes.get(ite).getPRD_NUM()==0 ) { %><a href="capturaRotacion.jsp?usu_cve=<%= ac.getUSU_CVE() %>&rcve=<%= lstRes.get(ite).getREG_CVE() %>" target="_self" title="Rotacion de Residente"><span class="glyphicon glyphicon-list-alt"></span></a><% } } %>
+                            <td><% if (ac.getPERFIL().equals("CLINICO") || ac.getPERFIL().equals("ADMINISTRADOR")) { if (lstRes.get(ite).getPRD_NUM()==0 ) { %><a href="capturaRotacion.jsp?usu_cve=<%= ac.getUSU_CVE() %>&rcve=<%= lstRes.get(ite).getREG_CVE() %>" target="_self" title="Rotacion de Residente"><span class="glyphicon glyphicon-list-alt"></span></a><% } } %>
                                 <% if (ac.getPERFIL().equals("ADMINISTRADOR")) {
                                     if (lstRes.get(ite).getPRD_NUM()!=0 ) { %><a href="eliminaRotacion?usu_cve=<%= ac.getUSU_CVE() %>&rcve=<%= lstRes.get(ite).getREG_CVE() %>" target="_self" title="Elimina rotacion de Residente"><span class="glyphicon glyphicon-remove"></span></a><% }                                         
                                     }
-                                %>
+                                %><%= ac.getPERFIL() %>
                             </td>
                         </tr>                            
 <%

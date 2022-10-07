@@ -23,8 +23,8 @@ public class DelegacionDAO implements DAO{
     Connection cn = BD.getConection();
     String sql;
     sql = "SELECT del_cve, CONCAT(edo_nom, ' ', del_nom) del_nom "
-            + "FROM srm_reg_ads_vis "
-            + "WHERE mta_ctg_cve not in (5) and ((grd_num=3 AND esp_cve IN (6,35,18)) OR (grd_num=2 AND esp_cve IN (37,120,31,39,30,25))) ";
+            + "FROM srm_reg_ads_vis v INNER JOIN srm_atn_med_ib_esp_grd_arc e ON e.esp_cve=v.esp_cve AND e.grd_num=v.grd_num "
+            + "WHERE mta_ctg_cve not in (5) "; //and ((grd_num=3 AND esp_cve IN (6,35,18)) OR (grd_num=2 AND esp_cve IN (37,120,31,39,30,25))) 
     if (del.getDEL_CVE()>0){
       sql += "AND del_cve=? ";
     }

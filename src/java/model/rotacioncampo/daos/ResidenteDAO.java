@@ -34,12 +34,13 @@ public class ResidenteDAO implements DAO{
             + "b.MTA_CVE, c.PRD_NUM, d.SDE_CVE SDE_CVE_ROT, d.SDE_NOM SDE_NOM_ROT, e.del_cve DEL_CVE_ROT, "
             + "CONCAT(f.EDO_NOM,' ',e.DEL_NOM) DEL_NOM_ROT "
             + "FROM srm_reg_ads_vis a "
-            + "LEFT JOIN srm_rot_cmp_arc b ON a.REG_CVE=b.REG_CVE "
-            + "LEFT JOIN srm_mta_prg_rot_cmp_arc c ON b.mta_cve=c.mta_cve "
+            + "LEFT JOIN srm_atn_med_ib_arc b ON a.REG_CVE=b.REG_CVE " //srm_rot_cmp_arc 
+            + "LEFT JOIN srm_mta_prg_atn_med_ib_arc c ON b.mta_cve=c.mta_cve " //srm_mta_prg_rot_cmp_arc
             + "LEFT JOIN gra_sde_cat d ON c.sde_cve_rot=d.sde_cve "
             + "LEFT JOIN ims_del_cat e ON d.del_Cve=e.del_cve "
             + "LEFT JOIN gra_edo_cat f ON e.edo_cve=f.edo_cve "
-            + "WHERE mta_ctg_cve not in (5) and ((a.grd_num=3 AND a.esp_cve IN (6,35,18)) OR (a.grd_num=2 AND a.esp_cve IN (37,120,31,39,30,25))) ";
+            + "INNER JOIN srm_atn_med_ib_esp_grd_arc g ON g.esp_cve=a.esp_cve AND g.grd_num=a.grd_num "
+            + "WHERE mta_ctg_cve not in (5) "; //and ((a.grd_num=3 AND a.esp_cve IN (6,35,18)) OR (a.grd_num=2 AND a.esp_cve IN (37,120,31,39,30,25)))
     if (res.getDEL_CVE() != 0) {
       sql = sql + "and a.DEL_cve=? ";
     }

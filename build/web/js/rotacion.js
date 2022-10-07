@@ -33,7 +33,7 @@ function cargaEspecialidad(){
 
 function cEsp(){
     var especialidades = eval("(" + obEsp.respuestaTexto() + ")");
-    var cadena="<select class='form-control' name='ESP_CVE' id='ESP_CVE' onchange='cargaResidente()'>";
+    var cadena="<select class='form-control' name='ESP_CVE' id='ESP_CVE' onchange='cargaGrado()'>";
         cadena += "<option value='0'></option>";
         for(var elm=0; elm<especialidades.length; elm++){
             cadena += "<option value='" + especialidades[elm].ESP_CVE + "'>" + especialidades[elm].ESP_NOM + "</option>";
@@ -43,6 +43,34 @@ function cEsp(){
     especialidades = null;
     obEsp=null;
     cargaResidente();
+}
+
+function cargaGrado(){
+  var ESP_CVE = document.getElementById("ESP_CVE")[document.getElementById("ESP_CVE").selectedIndex].value;  
+  obEsp = new ObjetoAJAX();
+  obEsp.enviar("grado?ESP_CVE=" + ESP_CVE,"GET","cGrad",null);      
+}
+
+function cGrad(){
+  var especialidad = eval("(" + obEsp.respuestaTexto() + ")");
+  var cadena="<select class='form-control' name='GRD_NUM' id='GRD_NUM' onchange='cargaResidentes()'>";
+  if (especialidad.length==1){
+    cadena += "<option value='" + especialidad[0].GRD_NUM + "'>" + especialidad[0].GRD_NUM + "</option>";
+  } else {
+    if (especialidad.length!=1){
+      cadena += "<option value='0'>TODAS</option>";
+    }
+    for(var elm=0; elm<especialidad.length; elm++){
+      cadena += "<option value='" + especialidad[elm].GRD_NUM + "'>" + especialidad[elm].GRD_NUM + "</option>";
+    }
+  }
+  cadena += "</select>";
+  document.getElementById("sGRD_NUM").innerHTML=cadena;
+  especialidad = null;
+  obEsp = null;
+
+  //cargaGrado();
+  cargaResidentes();
 }
 
 function cargaResidente(){

@@ -28,6 +28,10 @@
         <servlet-name>EliminaRotacionSVT</servlet-name>
         <servlet-class>model.rotacioncampo.servlets.EliminaRotacionSVT</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GradoSVT</servlet-name>
+        <servlet-class>model.rotacioncampo.servlets.GradoSVT</servlet-class>
+    </servlet>    
     <servlet-mapping>
         <servlet-name>SedeRotacionSVT</servlet-name>
         <url-pattern>/sedeRotacion</url-pattern>
@@ -56,6 +60,10 @@
         <servlet-name>EliminaRotacionSVT</servlet-name>
         <url-pattern>/eliminaRotacion</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GradoSVT</servlet-name>
+        <url-pattern>/grado</url-pattern>
+    </servlet-mapping>    
     <session-config>
         <session-timeout>
             30
