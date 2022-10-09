@@ -23,7 +23,7 @@
     String pagina = "";
     Acceso ac = new Acceso();
     Configuracion cnf = new Configuracion();
-    try {
+    //try {
       if (USU_CVE==null){
         throw new Exception("ACCESO RESTRINGIDO SIN USUARIO");
       }
@@ -185,7 +185,7 @@
         </div>
 
 
-            <span id="tblResidentes">
+            <span id="tblResidentes"><%= lstRes.size() %>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -239,9 +239,9 @@
     </body>
 </html>
 <%
-    } catch (Exception ex){
+    /* } catch (Exception ex){
       pagina = "error.jsp?e=" + ex.getMessage();
       response.sendRedirect(pagina);
-    }
+    } */
 
 %>

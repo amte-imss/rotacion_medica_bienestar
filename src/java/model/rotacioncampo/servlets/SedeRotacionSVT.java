@@ -39,10 +39,10 @@ public class SedeRotacionSVT extends HttpServlet {
         PrintWriter out = response.getWriter();
         StringBuilder oEdo = new StringBuilder("[");
         try {
-            int SDE_CVE = Integer.parseInt(request.getParameter("SDE_CVE"));
+            //int SDE_CVE = Integer.parseInt(request.getParameter("SDE_CVE"));
             int ESP_CVE = Integer.parseInt(request.getParameter("ESP_CVE"));
             int PRD_NUM = Integer.parseInt(request.getParameter("PRD_NUM"));
-            SedeRotacion sde = new SedeRotacion(SDE_CVE, ESP_CVE, PRD_NUM);
+            SedeRotacion sde = new SedeRotacion(ESP_CVE, PRD_NUM);
             List<SedeRotacion> lstEdo = SedeRotacionBP.consultaSedeRotacion(sde);
             int ite = 0;
             if (lstEdo.isEmpty()){

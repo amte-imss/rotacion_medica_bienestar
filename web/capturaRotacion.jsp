@@ -21,7 +21,7 @@
     String pagina = "";
     Acceso ac = new Acceso();
     Configuracion cnf = new Configuracion();
-    try {
+    //try {
         if (USU_CVE == null) {
             throw new Exception("ACCESO RESTRINGIDO SIN USUARIO");
         }
@@ -31,7 +31,7 @@
         int ite;
         int REG_CVE = Integer.parseInt(request.getParameter("rcve"));
         List<Residente> lstRes = ResidenteBP.consultaResidente(REG_CVE);
-        Periodo per = new Periodo(lstRes.get(0).getSDE_CVE(), lstRes.get(0).getESP_CVE());
+        Periodo per = new Periodo(0, null, lstRes.get(0).getSDE_CVE(), lstRes.get(0).getESP_CVE(), lstRes.get(0).getGRD_NUM());
         List<Periodo> lstPer = PeriodoBP.consultaPeriodo(per);
         SedeRotacion sro = new SedeRotacion(lstRes.get(0).getSDE_CVE(), lstRes.get(0).getESP_CVE(), 0);
         List<SedeRotacion> lstSRo = SedeRotacionBP.consultaSedeRotacion(sro);
@@ -158,7 +158,7 @@
                                     <%
                                         for (ite = 0; ite < lstPer.size(); ite++) {
                                     %>
-                                    <option value="<%= lstPer.get(ite).getPRD_NUM()%>"><%= lstPer.get(ite).getPRD_NUM()%></option>
+                                    <option value="<%= lstPer.get(ite).getPRD_NUM()%>"><%= lstPer.get(ite).getPRD_NOM()%></option>
                                     <%
                                             }
                                         }
@@ -203,7 +203,7 @@
                         <div class="clearfix col-md-12">
                             <div class="pull-right">
                                 <%
-                                    if (ac.getPERFIL().equals("PROFESOR")) {
+                                    if (ac.getPERFIL().equals("CLINICO")) {
                                 %>                        
                                 <button class="btn btn-primary" id="guarda" onclick="valida();" type="button">
                                     Guardar
@@ -224,9 +224,9 @@
 
 </html>
 <%
-    } catch (Exception ex) {
+    /*} catch (Exception ex) {
         pagina = "error.jsp?e=" + ex.getMessage();
         response.sendRedirect(pagina);
-    }
+    }*/
 
 %>

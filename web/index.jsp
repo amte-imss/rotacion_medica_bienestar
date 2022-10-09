@@ -10,7 +10,7 @@
 <%@page import="model.rotacioncampo.beans.Acceso"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%
-    String USU_CVE = request.getParameter("usu_cve"); //"45647"; //request.getParameter("usu_cve"); //"45718"
+    String USU_CVE = request.getParameter("usu_cve"); //"45647" profesor; //request.getParameter("usu_cve"); //"45718" administrador // 51773 clinico
     String pagina = "";
     Acceso ac = new Acceso();
     Configuracion cnf = new Configuracion();

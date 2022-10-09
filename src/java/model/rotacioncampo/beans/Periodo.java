@@ -13,6 +13,8 @@ public class Periodo {
     private int PRD_NUM;
     private int SDE_CVE;
     private int ESP_CVE;
+    private String PRD_NOM;
+    private int GRD_NUM;
 
     public Periodo(int SDE_CVE, int ESP_CVE) {
         this.SDE_CVE = SDE_CVE;
@@ -27,6 +29,21 @@ public class Periodo {
         this.SDE_CVE = SDE_CVE;
         this.ESP_CVE = ESP_CVE;
     }
+    
+    public Periodo(int PRD_NUM, String PRD_NOM, int SDE_CVE, int ESP_CVE) {
+        this.PRD_NUM = PRD_NUM;
+        this.PRD_NOM = PRD_NOM;
+        this.SDE_CVE = SDE_CVE;
+        this.ESP_CVE = ESP_CVE;
+    }
+    
+    public Periodo(int PRD_NUM, String PRD_NOM, int SDE_CVE, int ESP_CVE, int GRD_NUM) {
+        this.PRD_NUM = PRD_NUM;
+        this.PRD_NOM = PRD_NOM;
+        this.SDE_CVE = SDE_CVE;
+        this.ESP_CVE = ESP_CVE;
+        this.GRD_NUM = GRD_NUM;
+    }
 
     public int getPRD_NUM() {
         return PRD_NUM;
@@ -34,6 +51,14 @@ public class Periodo {
 
     public void setPRD_NUM(int PRD_NUM) {
         this.PRD_NUM = PRD_NUM;
+    }
+    
+    public String getPRD_NOM() {
+        return PRD_NOM;
+    }
+
+    public void setPRD_NOM(String PRD_NOM) {
+        this.PRD_NOM = PRD_NOM;
     }
 
     public int getSDE_CVE() {
@@ -52,6 +77,13 @@ public class Periodo {
         this.ESP_CVE = ESP_CVE;
     }
 
+    public int getGRD_NUM() {
+        return GRD_NUM;
+    }
+
+    public void setGRD_NUM(int GRD_NUM) {
+        this.GRD_NUM = GRD_NUM;
+    }
     
     
 }

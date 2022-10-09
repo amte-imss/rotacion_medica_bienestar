@@ -12,8 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.rotacioncampo.beans.Especialidad;
-import model.rotacioncampo.process.EspecialidadBP;
+import model.rotacioncampo.beans.Grado;
+import model.rotacioncampo.process.GradoBP;
 
 /**
  *
@@ -40,26 +40,35 @@ public class GradoSVT extends HttpServlet {
     try
     {
       String SDE_CVE = request.getParameter("SDE_CVE");
-      Especialidad esp = new Especialidad(Integer.parseInt(SDE_CVE), 0);
+      String ESP_CVE = request.getParameter("ESP_CVE");
+      Grado grad = new Grado(Integer.parseInt(SDE_CVE), Integer.parseInt(ESP_CVE));
       if (SDE_CVE.equals("0")) {
         oStr.append("{SDE_CVE:'");
         oStr.append(SDE_CVE);
-        oStr.append("', ESP_CVE:'0', ESP_NOM:'SELECCIONE SEDE'},");
+        oStr.append("', ESP_CVE:'0', GRD_NUM:'SELECCIONE SEDE'},");
       } else {
-        List<Especialidad> lstEsp = EspecialidadBP.consultaEspecialidad(esp);
-        
-        if (lstEsp.isEmpty()) {
+        if (ESP_CVE.equals("0")) {
           oStr.append("{SDE_CVE:'");
           oStr.append(SDE_CVE);
-          oStr.append("', ESP_CVE:'0', ESP_NOM:'NO SE ENCONTRARON ESPECIALIDADES'},");
+          oStr.append("', ESP_CVE:'");
+          oStr.append(ESP_CVE);
+          oStr.append("0', GRD_NUM:'SELECCIONE ESPECIALIDAD'},");
         } else {
-          for (int ite = 0; ite < lstEsp.size(); ite++) {
-            oStr.append(((Especialidad)lstEsp.get(ite)).toString());
+          List<Grado> lstGrad = GradoBP.consultaGrado(grad);
+
+          if (lstGrad.isEmpty()) {
+            oStr.append("{SDE_CVE:'");
+            oStr.append(SDE_CVE);
+            oStr.append("', ESP_CVE:'0', GRD_NUM:'NO SE ENCONTRARON GRADOS'},");
+          } else {
+            for (int ite = 0; ite < lstGrad.size(); ite++) {
+              oStr.append(((Grado)lstGrad.get(ite)).toString());
+            }
           }
         }
       }
     } catch (Exception ex) {
-      oStr.append("{SDE_CVE:'0', ESP_CVE:'0', ESP_NOM:'");
+      oStr.append("{SDE_CVE:'0', ESP_CVE:'0', GRD_NUM:'");
       oStr.append(ex.getMessage());
       oStr.append("'},");
     } finally {

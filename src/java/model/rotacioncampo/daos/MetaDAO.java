@@ -32,7 +32,7 @@ public class MetaDAO implements DAO{
             + "b.DEL_CVE, CONCAT(f.EDO_NOM, ' ', e.DEL_NOM) DEL_NOM, b.sde_cve, b.sde_nom, c.esp_cve, c.esp_nom, "
             + "d.DEL_CVE DEL_CVE_ROT, CONCAT(h.EDO_NOM, ' ', g.DEL_NOM) DEL_NOM_ROT, d.sde_cve SDE_CVE_ROT, d.sde_nom SDE_NOM_ROT, "
             + "a.prd_num, a.cup_aut, a.cup_ocu, a.cup_res, a.PRO_ANO "
-            + " FROM srm_mta_prg_rot_cmp_arc a "
+            + " FROM srm_mta_prg_atn_med_ib_arc a "
             + "INNER JOIN gra_sde_cat b ON a.sdE_cve=b.sde_cve "
             + "INNER JOIN ims_del_cat e ON b.del_cve=e.del_cve "
             + "INNER JOIN gra_edo_cat f ON e.EDO_CVE=f.edo_cve "

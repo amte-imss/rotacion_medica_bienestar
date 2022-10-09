@@ -11,7 +11,7 @@ function cargaMeta(){
     var PRD_NUM = document.getElementById("PRD_NUM")[document.getElementById("PRD_NUM").selectedIndex].value;
     
   obMta = new ObjetoAJAX();
-  obMta.enviar("sedeRotacion?SDE_CVE=" + SDE_CVE + "&ESP_CVE=" + ESP_CVE + "&PRD_NUM=" + PRD_NUM,"GET","cMta",null);    
+  obMta.enviar("sedeRotacion?ESP_CVE=" + ESP_CVE + "&PRD_NUM=" + PRD_NUM,"GET","cMta",null);  //SDE_CVE=" + SDE_CVE + "&  
 }
 
 function cMta(){

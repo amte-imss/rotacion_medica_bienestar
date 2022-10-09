@@ -42,7 +42,8 @@ public class ResidenteSVT extends HttpServlet {
       String DEL_CVE = request.getParameter("DEL_CVE");
       String SDE_CVE = request.getParameter("SDE_CVE");
       String ESP_CVE = request.getParameter("ESP_CVE");
-      Residente res = new Residente(Integer.parseInt(SDE_CVE), Integer.parseInt(DEL_CVE), Integer.parseInt(ESP_CVE));
+      String GRD_NUM = request.getParameter("GRD_NUM");
+      Residente res = new Residente(Integer.parseInt(SDE_CVE), Integer.parseInt(DEL_CVE), Integer.parseInt(ESP_CVE), Integer.parseInt(GRD_NUM));
 
         List<Residente> lstEsp = ResidenteBP.consultaResidente(res);
         

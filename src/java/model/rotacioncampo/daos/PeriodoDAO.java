@@ -29,11 +29,17 @@ public class PeriodoDAO implements DAO{
     Periodo per = (Periodo)obj;    
     Connection cn = BD.getConection();
     String sql;
-    sql = "SELECT DISTINCT PRD_NUM PRD_NUM FROM srm_mta_prg_rot_cmp_arc WHERE sde_cve=? AND esp_cve=? AND cup_res>0 "
-            + "ORDER BY 1";
+    sql = "SELECT DISTINCT PRD_NUM, PRD_NOM FROM srm_mta_prg_atn_med_ib_arc a inner join  srm_atn_med_ib_prd_cat b on a.PRD_NUM = b.PRD_CVE WHERE esp_cve=? AND cup_res>0 "; //sde_cve=? AND
+        if (per.getGRD_NUM()>0){
+            sql += "and a.esp_cve in (select c.ESP_CVE from srm_atn_med_ib_esp_grd_arc c where c.ESP_CVE = a.esp_cve and c.GRD_NUM = ? and c.PRD_CVE = a.PRD_NUM) ";
+        }
+    sql += "ORDER BY 1";
     PreparedStatement ps = cn.prepareStatement(sql);
-    ps.setInt(1, per.getSDE_CVE());
-    ps.setInt(2, per.getESP_CVE());
+    //ps.setInt(1, per.getSDE_CVE());
+    ps.setInt(1, per.getESP_CVE());
+    if (per.getGRD_NUM()>0){
+        ps.setInt(2, per.getGRD_NUM());
+    }
     ResultSet rs = ps.executeQuery();
     List<Periodo> lstPer = new ArrayList<Periodo>();
     int ite;
@@ -41,7 +47,7 @@ public class PeriodoDAO implements DAO{
     if (rs.next()){
       rs.beforeFirst();
       while(rs.next()){
-        lstPer.add(ite, new Periodo(rs.getInt("PRD_NUM"), per.getSDE_CVE(), per.getESP_CVE()));
+        lstPer.add(ite, new Periodo(rs.getInt("PRD_NUM"), rs.getString("PRD_NOM"), per.getSDE_CVE(), per.getESP_CVE()));
         ite++;
       }
     } 

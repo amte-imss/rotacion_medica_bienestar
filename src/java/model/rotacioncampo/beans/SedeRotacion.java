@@ -19,11 +19,24 @@ public class SedeRotacion {
 
     public SedeRotacion() {
     }
-
+    
+    public SedeRotacion(int ESP_CVE, int PRD_NUM) {
+        this.ESP_CVE = ESP_CVE;
+        this.PRD_NUM = PRD_NUM;
+    }
+    
     public SedeRotacion(int SDE_CVE, int ESP_CVE, int PRD_NUM) {
         this.SDE_CVE = SDE_CVE;
         this.ESP_CVE = ESP_CVE;
         this.PRD_NUM = PRD_NUM;
+    }
+    
+    public SedeRotacion(int MTA_CVE, int ESP_CVE, int PRD_NUM, int SDE_CVE_ROT, String SDE_NOM_ROT) {
+        this.MTA_CVE = MTA_CVE;
+        this.ESP_CVE = ESP_CVE;
+        this.PRD_NUM = PRD_NUM;
+        this.SDE_CVE_ROT = SDE_CVE_ROT;
+        this.SDE_NOM_ROT = SDE_NOM_ROT;
     }
 
     public SedeRotacion(int MTA_CVE, int SDE_CVE, int ESP_CVE, int PRD_NUM, int SDE_CVE_ROT, String SDE_NOM_ROT) {

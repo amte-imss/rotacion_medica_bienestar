@@ -23,8 +23,9 @@ public class SedeDAO implements DAO{
     Connection cn = BD.getConection();
     String sql;
     sql = "SELECT del_cve, sde_cve, sde_nom " 
-            + "FROM srm_reg_ads_vis v INNER JOIN srm_atn_med_ib_esp_grd_arc e ON e.esp_cve=v.esp_cve AND e.grd_num=v.grd_num "
-            + "WHERE mta_ctg_cve not in (5)" // and ((grd_num=3 AND esp_cve IN (6,35,18)) OR (grd_num=2 AND esp_cve IN (37,120,31,39,30,25))) 
+            + "FROM srm_reg_ads_vis a "
+            + "WHERE mta_ctg_cve not in (5) " // and ((grd_num=3 AND esp_cve IN (6,35,18)) OR (grd_num=2 AND esp_cve IN (37,120,31,39,30,25))) 
+            + "AND CONCAT(a.esp_cve,'|',a.grd_num) in (select CONCAT(a.esp_cve,'|',a.grd_num) from srm_atn_med_ib_esp_grd_arc g WHERE g.esp_cve=a.esp_cve AND g.grd_num=a.grd_num) "
             + "AND del_cve=? ";
     if (sde.getSDE_CVE()>0){
       sql += "AND sde_cve=? ";

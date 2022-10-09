@@ -22,19 +22,21 @@ public class GradoDAO implements DAO{
     Grado grad = (Grado)obj;
     Connection cn = BD.getConection();
     String sql;
-    sql = "SELECT sde_cve, v.esp_cve, e.grd_num "
-            + "FROM srm_reg_ads_vis v INNER JOIN srm_atn_med_ib_esp_grd_arc e ON e.esp_cve=v.esp_cve AND e.grd_num=v.grd_num "
+    sql = "SELECT sde_cve, esp_cve, grd_num "
+            + "FROM srm_reg_ads_vis a "
             + "WHERE mta_ctg_cve not in (5) " // and ((grd_num=3 AND esp_cve IN (6,35,18)) OR (grd_num=2 AND esp_cve IN (37,120,31,39,30,25))) 
-            + "AND sde_cve=? ";
-    if (grad.getESP_CVE()>0){
-      sql += "AND esp_cve=? ";
+            + "AND CONCAT(a.esp_cve,'|',a.grd_num) in (select CONCAT(a.esp_cve,'|',a.grd_num) from srm_atn_med_ib_esp_grd_arc g WHERE g.esp_cve=a.esp_cve AND g.grd_num=a.grd_num) "
+            + "AND sde_cve=? AND esp_cve=? ";
+    if (grad.getGRD_NUM()>0){
+      sql += "AND grd_num=? ";
     }
-    sql += "GROUP BY sde_cve, esp_cve, esp_nom "
+    sql += "GROUP BY sde_cve, esp_cve, grd_num "
             + "ORDER BY 3";
     PreparedStatement ps = cn.prepareStatement(sql);
     ps.setInt(1, grad.getSDE_CVE());
-    if (grad.getESP_CVE()>0){
-        ps.setInt(2, grad.getESP_CVE());
+    ps.setInt(2, grad.getESP_CVE());
+    if (grad.getGRD_NUM()>0){
+        ps.setInt(3, grad.getGRD_NUM());
     }
     ResultSet rs = ps.executeQuery();
     List<Grado> lstDel = new ArrayList<Grado>();
@@ -43,7 +45,7 @@ public class GradoDAO implements DAO{
     if (rs.next()){
       rs.beforeFirst();
       while(rs.next()){
-        lstDel.add(ite,new Grado(rs.getInt("GRD_NUM")));
+        lstDel.add(ite,new Grado(rs.getInt("SDE_CVE"), rs.getInt("ESP_CVE"), rs.getInt("GRD_NUM")));
         ite++;
       }
     } 
