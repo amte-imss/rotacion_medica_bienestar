@@ -37,7 +37,7 @@ public class MetaDAO implements DAO{
             + "left join srm_reg_ads_vis aaa ON aaa.REG_CVE=aa.REG_CVE "
             + "INNER JOIN gra_sde_cat b ON aaa.sdE_cve=b.sde_cve "
             + "INNER JOIN ims_del_cat e ON b.del_cve=e.del_cve "
-            + "INNER JOIN gra_edo_cat f ON e.EDO_CVE=f.edo_cve "*/
+            + "INNER JOIN gra_edo_cat f ON e.EDO_CVE=f.edo_cve "*/ 
             + "INNER JOIN srm_esp_cat c ON a.ESP_CVE=c.esp_cve "
             + "INNER JOIN gra_sde_cat d ON a.sde_cve_rot=d.sde_cve "
             + "INNER JOIN ims_del_cat g ON d.DEL_CVE=g.DEL_CVE "
