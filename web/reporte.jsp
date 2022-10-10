@@ -19,7 +19,7 @@ try{
   response.setContentType("application/vnd.ms-excel");  
   response.setHeader("Content-disposition", "inline; filename=reporte.xls");
 %>
-<%@page contentType="application/vnd.ms-excel" pageEncoding="UTF-8"%>
+<%@page contentType="application/vnd.ms-excel" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -33,6 +33,8 @@ try{
         <td style="background-color: #000000; color: #FFFFFF">SEDE DE<BR>ADSCRIPCION</td>
         <td style="background-color: #000000; color: #FFFFFF">ESPECIALIDAD</td>
         <td style="background-color: #000000; color: #FFFFFF">CURP</td>
+        <td style="background-color: #000000; color: #FFFFFF">TELEFONO</td>
+        <td style="background-color: #000000; color: #FFFFFF">CORREO</td>
         <td style="background-color: #000000; color: #FFFFFF">NOMBRE</td>
         <td style="background-color: #000000; color: #FFFFFF">DELEGACION<BR>ROTACION</td>
         <td style="background-color: #000000; color: #FFFFFF">SEDE<BR>ROTACION</td>
@@ -47,6 +49,8 @@ try{
         <td><%= lstRes.get(ite).getSDE_NOM() %></td>
         <td><%= lstRes.get(ite).getESP_NOM() %></td>
         <td><%= lstRes.get(ite).getCURP() %></td>
+        <td><%= lstRes.get(ite).getTELEFONOS() %></td>
+        <td><%= lstRes.get(ite).getCORREO() %></td>
         <td><%= lstRes.get(ite).getPER_AP1() %> <%= lstRes.get(ite).getPER_AP2() %> <%= lstRes.get(ite).getPER_NOM() %></td>
         <td><% if (lstRes.get(ite).getPRD_NUM()!=0) { %><%= lstRes.get(ite).getDEL_NOM_ROT() %><% } %></td>
         <td><% if (lstRes.get(ite).getPRD_NUM()!=0) { %><%= lstRes.get(ite).getSDE_NOM_ROT() %><% } %></td>

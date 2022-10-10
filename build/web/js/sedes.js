@@ -55,7 +55,7 @@ function cargaMetas(){
 
 function cMta(){
     var residentes = eval("(" + obRes.respuestaTexto() + ")");
-    var cadena="<table class='table table-bordered'><thead><tr>";
+    var cadena="<p>Total de registros: "+((residentes[0].DEL_CVE=="0") ? "0" : residentes.length)+"</p><table class='table table-bordered'><thead><tr>";
     cadena+="<th>DELEGACION</th><th>SEDE</th><th>ESPECIALIDAD</th><th>PERIODO</th><th>DELEGACION<br>ROTACION</th><th>SEDE<br>ROTACION</th><th>CUPO</th><th>OCUPADO</th><th>RESTANTE</th>";
     if (residentes[0].DEL_CVE=="0"){
         cadena+="<tr><td colspan='9'>No se encontrarón registros</td></tr>";

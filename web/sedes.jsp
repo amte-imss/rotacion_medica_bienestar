@@ -90,7 +90,7 @@
         <input type="hidden" id="PERFIL" value="<%= ac.getPERFIL() %>" />
         <input type="hidden" id="PRO_ANO" value="<%= cnf.getCAL_ANO() %>" />
         <div class="row">
-        <div class="form-group">
+        <!-- div class="form-group">
           <label class="control-label col-sm-2" for="DEL_CVE">Delegación<span id="valas_001" class="form-text">*</span>:</label>
           <div class="col-sm-6">
             <select class="form-control" name="DEL_CVE" id="DEL_CVE" onchange="cargaSede()">
@@ -156,7 +156,7 @@
           <label class="control-label col-sm-2" for="ESP_CVE">Especialidad<span id="valas_003" class="form-text">*</span>:</label>
           <div class="col-sm-6">
           <span id="sESP_CVE">
-            <select class="form-control" name="ESP_CVE" id="ESP_CVE" onchange="cargaResidentes()">
+            <select class="form-control" name="ESP_CVE" id="ESP_CVE" onchange="cargaMetas()">
                 <%
                   ite=0;
                   if (lstEsp.isEmpty()){
@@ -182,15 +182,15 @@
           </span>
           <small id="val_003" class="form-text form-text-error" style="color:#D0021B; display: none"></small>
           </div>
-        </div>
+        </div -->
 
 
-            <span id="tblResidentes"><%= lstRes.size() %>
+            <span id="tblResidentes">Total de registros: <%= (lstRes.isEmpty()) ? "0" : lstRes.size() %>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>DELEGACION</th>
-                            <th>SEDE</th>
+                            <!--th>DELEGACION</th>
+                            <th>SEDE</th-->
                             <th>ESPECIALIDAD</th>
                             <th>PERIODO</th>
                             <th>DELEGACION<br>ROTACION</th>
@@ -213,10 +213,10 @@
         for(ite=0; ite<lstRes.size();ite++){
 %>
                         <tr>
-                            <td><%= lstRes.get(ite).getDEL_NOM() %></td>
-                            <td><%= lstRes.get(ite).getSDE_NOM()%></td>
+                            <!-- td><%= lstRes.get(ite).getDEL_NOM() %></td>
+                            <td><%= lstRes.get(ite).getSDE_NOM()%></td-->
                             <td><%= lstRes.get(ite).getESP_NOM() %></td>
-                            <td><%= lstRes.get(ite).getPRD_NUM() %></td>
+                            <td><%= lstRes.get(ite).getPRD_NOM() %></td>
                             <td><%= lstRes.get(ite).getDEL_NOM_ROT() %></td>
                             <td><%= lstRes.get(ite).getSDE_NOM_ROT() %></td>
                             <td><%= lstRes.get(ite).getCUP_AUT() %></td>

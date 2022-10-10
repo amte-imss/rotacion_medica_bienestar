@@ -31,6 +31,8 @@ public class Residente {
   private int DEL_CVE_ROT;
   private String DEL_NOM_ROT;  
   private String PRD_NOM;
+  private String TELEFONOS;
+  private String CORREO;
 
     public Residente() {
     }
@@ -61,7 +63,7 @@ public class Residente {
         this.GRD_NUM = GRD_NUM;
     }
     
-    public Residente(int ADS_CVE, int REG_CVE, int PER_CVE, String CURP, String PER_AP1, String PER_AP2, String PER_NOM, int GRD_NUM, int SDE_CVE, String SDE_NOM, int DEL_CVE, String DEL_NOM, int ESP_CVE, String ESP_NOM, int MTA_CVE, int PRD_NUM, int SDE_CVE_ROT, String SDE_NOM_ROT, int DEL_CVE_ROT, String DEL_NOM_ROT, String PRD_NOM) {
+    public Residente(int ADS_CVE, int REG_CVE, int PER_CVE, String CURP, String PER_AP1, String PER_AP2, String PER_NOM, int GRD_NUM, int SDE_CVE, String SDE_NOM, int DEL_CVE, String DEL_NOM, int ESP_CVE, String ESP_NOM, int MTA_CVE, int PRD_NUM, int SDE_CVE_ROT, String SDE_NOM_ROT, int DEL_CVE_ROT, String DEL_NOM_ROT, String PRD_NOM, String TELEFONOS, String CORREO) {
         this.ADS_CVE = ADS_CVE;
         this.REG_CVE = REG_CVE;
         this.PER_CVE = PER_CVE;
@@ -83,7 +85,9 @@ public class Residente {
         this.DEL_CVE_ROT = DEL_CVE_ROT;
         this.DEL_NOM_ROT = DEL_NOM_ROT;
         this.PRD_NOM = PRD_NOM;
-    }
+        this.TELEFONOS = TELEFONOS;
+        this.CORREO = CORREO;
+    } 
 
     public int getPRD_NUM() {
         return PRD_NUM;
@@ -252,6 +256,22 @@ public class Residente {
     public void setPRD_NOM(String PRD_NOM) {
         this.PRD_NOM = PRD_NOM;
     }
+    
+    public String getTELEFONOS() {
+        return TELEFONOS;
+    }
+
+    public void setTELEFONOS(String TELEFONOS) {
+        this.TELEFONOS = TELEFONOS;
+    }
+    
+    public String getCORREO() {
+        return CORREO;
+    }
+
+    public void setCORREO(String CORREO) {
+        this.CORREO = CORREO;
+    }
 
     @Override
     public String toString() {
@@ -261,7 +281,8 @@ public class Residente {
                 + "SDE_NOM:'" + SDE_NOM + "', DEL_CVE:'" + DEL_CVE + "', DEL_NOM:'" + DEL_NOM + "', "
                 + "ESP_CVE:'" + ESP_CVE + "', ESP_NOM:'" + ESP_NOM + "', MTA_CVE:'" + MTA_CVE + "', "
                 + "PRD_NUM:'" + PRD_NUM + "', SDE_CVE_ROT:'" + SDE_CVE_ROT + "', SDE_NOM_ROT:'" + SDE_NOM_ROT + "', "
-                + "DEL_CVE_ROT:'" + DEL_CVE_ROT + "', DEL_NOM_ROT:'" + DEL_NOM_ROT + "', PRD_NOM:'" + PRD_NOM +"'},";
+                + "DEL_CVE_ROT:'" + DEL_CVE_ROT + "', DEL_NOM_ROT:'" + DEL_NOM_ROT + "', PRD_NOM:'" + PRD_NOM + "', "
+                + "TELEFONOS:'" + TELEFONOS + "', CORREO:'" + CORREO +"'},";
     }
   
 }

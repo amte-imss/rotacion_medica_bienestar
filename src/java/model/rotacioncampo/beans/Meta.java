@@ -25,6 +25,7 @@ public class Meta {
     private int CUP_OCU;
     private int CUP_RES;
     private int PRO_ANO;
+    private String PRD_NOM;
 
     public Meta() {
     }
@@ -46,8 +47,23 @@ public class Meta {
         this.ESP_CVE = ESP_CVE;
         this.PRO_ANO = PRO_ANO;
     }
+    
+    public Meta(int ESP_CVE, String ESP_NOM, int DEL_CVE_ROT, String DEL_NOM_ROT, int SDE_CVE_ROT, String SDE_NOM_ROT, int PRD_NUM, int CUP_AUT, int CUP_OCU, int CUP_RES, int PRO_ANO, String PRD_NOM) {
+        this.ESP_CVE = ESP_CVE;
+        this.ESP_NOM = ESP_NOM;
+        this.DEL_CVE_ROT = DEL_CVE_ROT;
+        this.DEL_NOM_ROT = DEL_NOM_ROT;
+        this.SDE_CVE_ROT = SDE_CVE_ROT;
+        this.SDE_NOM_ROT = SDE_NOM_ROT;
+        this.PRD_NUM = PRD_NUM;
+        this.CUP_AUT = CUP_AUT;
+        this.CUP_OCU = CUP_OCU;
+        this.CUP_RES = CUP_RES;
+        this.PRO_ANO = PRO_ANO;
+        this.PRD_NOM = PRD_NOM;
+    }
 
-    public Meta(int DEL_CVE, String DEL_NOM, int SDE_CVE, String SDE_NOM, int ESP_CVE, String ESP_NOM, int DEL_CVE_ROT, String DEL_NOM_ROT, int SDE_CVE_ROT, String SDE_NOM_ROT, int PRD_NUM, int CUP_AUT, int CUP_OCU, int CUP_RES, int PRO_ANO) {
+    public Meta(int DEL_CVE, String DEL_NOM, int SDE_CVE, String SDE_NOM, int ESP_CVE, String ESP_NOM, int DEL_CVE_ROT, String DEL_NOM_ROT, int SDE_CVE_ROT, String SDE_NOM_ROT, int PRD_NUM, int CUP_AUT, int CUP_OCU, int CUP_RES, int PRO_ANO, String PRD_NOM) {
         this.DEL_CVE = DEL_CVE;
         this.DEL_NOM = DEL_NOM;
         this.SDE_CVE = SDE_CVE;
@@ -63,6 +79,7 @@ public class Meta {
         this.CUP_OCU = CUP_OCU;
         this.CUP_RES = CUP_RES;
         this.PRO_ANO = PRO_ANO;
+        this.PRD_NOM = PRD_NOM;
     }
 
     public int getDEL_CVE() {
@@ -184,6 +201,14 @@ public class Meta {
     public void setPRO_ANO(int PRO_ANO) {
         this.PRO_ANO = PRO_ANO;
     }
+    
+    public String getPRD_NOM() {
+        return PRD_NOM;
+    }
+
+    public void setPRD_NOM(String PRD_NOM) {
+        this.PRD_NOM = PRD_NOM;
+    }
 
     @Override
     public String toString() {
@@ -191,6 +216,6 @@ public class Meta {
                 + "ESP_CVE:'" + ESP_CVE + "', ESP_NOM:'" + ESP_NOM + "', DEL_CVE_ROT:'" + DEL_CVE_ROT + "', "
                 + "DEL_NOM_ROT:'" + DEL_NOM_ROT + "', SDE_CVE_ROT:'" + SDE_CVE_ROT + "', SDE_NOM_ROT:'" + SDE_NOM_ROT + "', "
                 + "PRD_NUM:'" + PRD_NUM + "', CUP_AUT:'" + CUP_AUT + "', CUP_OCU:'" + CUP_OCU + "', CUP_RES:'" + CUP_RES + "', "
-                + "PRO_ANO:'" + PRO_ANO + "'},";
+                + "PRO_ANO:'" + PRO_ANO + "', PRD_NOM:'" + PRD_NOM + "'},";
     }
 }

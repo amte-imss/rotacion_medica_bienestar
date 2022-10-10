@@ -32,7 +32,9 @@ public class ResidenteDAO implements DAO{
             + "replace(a.PER_AP2,'''','''''') PER_AP2, replace(a.PER_NOM,'''','''''') PER_NOM, a.GRD_NUM, "
             + "a.SDE_CVE, a.SDE_NOM, a.DEL_CVE, CONCAT(a.EDO_NOM,' ',a.DEL_NOM) DEL_NOM, a.ESP_CVE, a.ESP_NOM, "
             + "b.MTA_CVE, c.PRD_NUM, d.SDE_CVE SDE_CVE_ROT, d.SDE_NOM SDE_NOM_ROT, e.del_cve DEL_CVE_ROT, "
-            + "CONCAT(f.EDO_NOM,' ',e.DEL_NOM) DEL_NOM_ROT, PRD_NOM "
+            + "CONCAT(f.EDO_NOM,' ',e.DEL_NOM) DEL_NOM_ROT, PRD_NOM, "
+            + "(select CONCAT('TEL: ',h.TEL_NUM,', CEL:',h.TEL_EXT_NUM) from gra_per_tel_num_arc h where h.PER_CVE = a.PER_CVE and h.TEL_TIP_CVE = 1 limit 1) TELEFONOS, "
+            + "(select i.EML_URL from gra_per_eml_arc i where i.PER_CVE = a.per_cve and i.eml_tip_cve = 1) CORREO "
             + "FROM srm_reg_ads_vis a "
             + "LEFT JOIN srm_atn_med_ib_arc b ON a.REG_CVE=b.REG_CVE " //srm_rot_cmp_arc 
             + "LEFT JOIN srm_mta_prg_atn_med_ib_arc c ON b.mta_cve=c.mta_cve " //srm_mta_prg_rot_cmp_arc
@@ -81,7 +83,7 @@ public class ResidenteDAO implements DAO{
     if (rs.next()) {
       rs.beforeFirst();
       while (rs.next()) {
-        lstRes.add(ite, new Residente(rs.getInt("ADS_CVE"), rs.getInt("REG_CVE"), rs.getInt("PER_CVE"), rs.getString("CURP"), rs.getString("PER_AP1").replace("'", "''"), rs.getString("PER_AP2").replace("'", "''"), rs.getString("PER_NOM").replace("'", "''"), rs.getInt("GRD_NUM"), rs.getInt("SDE_CVE"), rs.getString("SDE_NOM"), rs.getInt("DEL_CVE"), rs.getString("DEL_NOM"), rs.getInt("ESP_CVE"), rs.getString("ESP_NOM"), rs.getInt("MTA_CVE"), rs.getInt("PRD_NUM"), rs.getInt("SDE_CVE_ROT"), rs.getString("SDE_NOM_ROT"), rs.getInt("DEL_CVE_ROT"), rs.getString("DEL_NOM_ROT"), rs.getString("PRD_NOM")));
+        lstRes.add(ite, new Residente(rs.getInt("ADS_CVE"), rs.getInt("REG_CVE"), rs.getInt("PER_CVE"), rs.getString("CURP"), rs.getString("PER_AP1").replace("'", "''"), rs.getString("PER_AP2").replace("'", "''"), rs.getString("PER_NOM").replace("'", "''"), rs.getInt("GRD_NUM"), rs.getInt("SDE_CVE"), rs.getString("SDE_NOM"), rs.getInt("DEL_CVE"), rs.getString("DEL_NOM"), rs.getInt("ESP_CVE"), rs.getString("ESP_NOM"), rs.getInt("MTA_CVE"), rs.getInt("PRD_NUM"), rs.getInt("SDE_CVE_ROT"), rs.getString("SDE_NOM_ROT"), rs.getInt("DEL_CVE_ROT"), rs.getString("DEL_NOM_ROT"), rs.getString("PRD_NOM"), rs.getString("TELEFONOS"), rs.getString("CORREO")));
         ite++;
       }
     }
@@ -97,13 +99,16 @@ public class ResidenteDAO implements DAO{
             + "replace(a.PER_AP2,'''','''''') PER_AP2, replace(a.PER_NOM,'''','''''') PER_NOM, a.GRD_NUM, "
             + "a.SDE_CVE, a.SDE_NOM, a.DEL_CVE, CONCAT(a.EDO_NOM,' ',a.DEL_NOM) DEL_NOM, a.ESP_CVE, a.ESP_NOM, "
             + "b.MTA_CVE, c.PRD_NUM, d.SDE_CVE SDE_CVE_ROT, d.SDE_NOM SDE_NOM_ROT, e.del_cve DEL_CVE_ROT, "
-            + "CONCAT(f.EDO_NOM,' ',e.DEL_NOM) DEL_NOM_ROT "
+            + "CONCAT(f.EDO_NOM,' ',e.DEL_NOM) DEL_NOM_ROT, PRD_NOM, "
+            + "(select CONCAT('TEL: ',h.TEL_NUM,', CEL:',h.TEL_EXT_NUM) from gra_per_tel_num_arc h where h.PER_CVE = a.PER_CVE and h.TEL_TIP_CVE = 1 limit 1) TELEFONOS, "
+            + "(select i.EML_URL from gra_per_eml_arc i where i.PER_CVE = a.per_cve and i.eml_tip_cve = 1) CORREO "
             + "FROM srm_reg_ads_vis a "
             + "LEFT JOIN srm_atn_med_ib_arc b ON a.REG_CVE=b.REG_CVE "
             + "LEFT JOIN srm_mta_prg_atn_med_ib_arc c ON b.mta_cve=c.mta_cve "
             + "LEFT JOIN gra_sde_cat d ON c.sde_cve_rot=d.sde_cve "
             + "LEFT JOIN ims_del_cat e ON d.del_Cve=e.del_cve "
             + "LEFT JOIN gra_edo_cat f ON e.edo_cve=f.edo_cve "
+            + "LEFT join srm_atn_med_ib_prd_cat g on c.PRD_NUM = g.PRD_CVE  "
             + "WHERE mta_ctg_cve not in (5)  and a.REG_CVE=? " // and ((a.grd_num=3 AND a.esp_cve IN (6,35,18)) OR (a.grd_num=2 AND a.esp_cve IN (37,120,31,39,30,25))) and a.REG_CVE=? ";
             + "AND CONCAT(a.esp_cve,'|',a.grd_num) in (select CONCAT(a.esp_cve,'|',a.grd_num) from srm_atn_med_ib_esp_grd_arc g WHERE g.esp_cve=a.esp_cve AND g.grd_num=a.grd_num) ";
     sql = sql + "ORDER BY 12, 10, 14, 4, 5, 6, 7 ";
@@ -117,7 +122,7 @@ public class ResidenteDAO implements DAO{
     if (rs.next()) {
       rs.beforeFirst();
       while (rs.next()) {
-        lstRes.add(ite,  new Residente(rs.getInt("ADS_CVE"), rs.getInt("REG_CVE"), rs.getInt("PER_CVE"), rs.getString("CURP"), rs.getString("PER_AP1").replace("'", "''"), rs.getString("PER_AP2").replace("'", "''"), rs.getString("PER_NOM").replace("'", "''"), rs.getInt("GRD_NUM"), rs.getInt("SDE_CVE"), rs.getString("SDE_NOM"), rs.getInt("DEL_CVE"), rs.getString("DEL_NOM"), rs.getInt("ESP_CVE"), rs.getString("ESP_NOM"), rs.getInt("MTA_CVE"), rs.getInt("PRD_NUM"), rs.getInt("SDE_CVE_ROT"), rs.getString("SDE_NOM_ROT"), rs.getInt("DEL_CVE_ROT"), rs.getString("DEL_NOM_ROT"), rs.getString("PRD_NOM")));
+        lstRes.add(ite, new Residente(rs.getInt("ADS_CVE"), rs.getInt("REG_CVE"), rs.getInt("PER_CVE"), rs.getString("CURP"), rs.getString("PER_AP1").replace("'", "''"), rs.getString("PER_AP2").replace("'", "''"), rs.getString("PER_NOM").replace("'", "''"), rs.getInt("GRD_NUM"), rs.getInt("SDE_CVE"), rs.getString("SDE_NOM"), rs.getInt("DEL_CVE"), rs.getString("DEL_NOM"), rs.getInt("ESP_CVE"), rs.getString("ESP_NOM"), rs.getInt("MTA_CVE"), rs.getInt("PRD_NUM"), rs.getInt("SDE_CVE_ROT"), rs.getString("SDE_NOM_ROT"), rs.getInt("DEL_CVE_ROT"), rs.getString("DEL_NOM_ROT"), rs.getString("PRD_NOM"), rs.getString("TELEFONOS"), rs.getString("CORREO")));
         ite++;
       }
     }

@@ -29,40 +29,43 @@ public class MetaDAO implements DAO{
     Meta res = (Meta)obj;
     Connection cn = BD.getConection();
     String sql = "SELECT "
-            + "b.DEL_CVE, CONCAT(f.EDO_NOM, ' ', e.DEL_NOM) DEL_NOM, b.sde_cve, b.sde_nom, c.esp_cve, c.esp_nom, "
+            + "c.esp_cve, c.esp_nom, " //b.DEL_CVE, CONCAT(f.EDO_NOM, ' ', e.DEL_NOM) DEL_NOM, b.sde_cve, b.sde_nom, 
             + "d.DEL_CVE DEL_CVE_ROT, CONCAT(h.EDO_NOM, ' ', g.DEL_NOM) DEL_NOM_ROT, d.sde_cve SDE_CVE_ROT, d.sde_nom SDE_NOM_ROT, "
-            + "a.prd_num, a.cup_aut, a.cup_ocu, a.cup_res, a.PRO_ANO "
-            + " FROM srm_mta_prg_atn_med_ib_arc a "
-            + "INNER JOIN gra_sde_cat b ON a.sdE_cve=b.sde_cve "
+            + "a.prd_num, a.cup_aut, a.cup_ocu, a.cup_res, a.PRO_ANO, PRD_NOM "
+            + "FROM srm_mta_prg_atn_med_ib_arc a "
+            /*+ "LEFT JOIN srm_atn_med_ib_arc aa ON a.mta_cve=aa.mta_cve "
+            + "left join srm_reg_ads_vis aaa ON aaa.REG_CVE=aa.REG_CVE "
+            + "INNER JOIN gra_sde_cat b ON aaa.sdE_cve=b.sde_cve "
             + "INNER JOIN ims_del_cat e ON b.del_cve=e.del_cve "
-            + "INNER JOIN gra_edo_cat f ON e.EDO_CVE=f.edo_cve "
+            + "INNER JOIN gra_edo_cat f ON e.EDO_CVE=f.edo_cve "*/
             + "INNER JOIN srm_esp_cat c ON a.ESP_CVE=c.esp_cve "
             + "INNER JOIN gra_sde_cat d ON a.sde_cve_rot=d.sde_cve "
             + "INNER JOIN ims_del_cat g ON d.DEL_CVE=g.DEL_CVE "
             + "INNER JOIN gra_edo_cat h ON g.EDO_CVE=h.EDO_CVE "
+            + "LEFT join srm_atn_med_ib_prd_cat i on a.PRD_NUM = i.PRD_CVE "
             + "WHERE a.pro_ano=? ";
-    if (res.getDEL_CVE() != 0) {
+    /*if (res.getDEL_CVE() != 0) {
       sql = sql + "and b.DEL_cve=? ";
     }
     if (res.getSDE_CVE() != 0) {
-      sql = sql + "AND a.SDE_cve=? ";
-    }
+      sql = sql + "AND aaa.SDE_cve=? ";
+    }*/
     if (res.getESP_CVE() != 0) {
       sql = sql + "AND a.ESP_cve=? ";
     }
-    sql = sql + "ORDER BY 2,4,6,11,8,10 ";
+    sql = sql + "ORDER BY 2, 7, 4, 6"; //2,4,6,11,8,10 
     int itePS=1;
     PreparedStatement ps = cn.prepareStatement(sql);
     ps.setInt(itePS, res.getPRO_ANO());
     itePS++;
-    if (res.getDEL_CVE() != 0) {
+    /*if (res.getDEL_CVE() != 0) {
         ps.setInt(itePS, res.getDEL_CVE());
         itePS++;
     }
     if (res.getSDE_CVE() != 0) {
         ps.setInt(itePS, res.getSDE_CVE());
         itePS++;
-    }
+    }*/
     if (res.getESP_CVE() != 0) {
       ps.setInt(itePS, res.getESP_CVE());
     }
@@ -73,10 +76,10 @@ public class MetaDAO implements DAO{
     if (rs.next()) {
       rs.beforeFirst();
       while (rs.next()) {
-        lstRes.add(ite, new Meta(rs.getInt("DEL_CVE"), rs.getString("DEL_NOM"), rs.getInt("SDE_CVE"), 
-                rs.getString("SDE_NOM"), rs.getInt("ESP_CVE"), rs.getString("ESP_NOM"), rs.getInt("DEL_CVE_ROT"), 
+        lstRes.add(ite, new Meta(/*rs.getInt("DEL_CVE"), rs.getString("DEL_NOM"), rs.getInt("SDE_CVE"),  
+                rs.getString("SDE_NOM"),*/ rs.getInt("ESP_CVE"), rs.getString("ESP_NOM"), rs.getInt("DEL_CVE_ROT"), 
                 rs.getString("DEL_NOM_ROT"), rs.getInt("SDE_CVE_ROT"), rs.getString("SDE_NOM_ROT"), rs.getInt("PRD_NUM"), 
-                rs.getInt("CUP_AUT"), rs.getInt("CUP_OCU"), rs.getInt("CUP_RES"), rs.getInt("PRO_ANO")));
+                rs.getInt("CUP_AUT"), rs.getInt("CUP_OCU"), rs.getInt("CUP_RES"), rs.getInt("PRO_ANO"), rs.getString("PRD_NOM")));
         ite++;
       }
     }
