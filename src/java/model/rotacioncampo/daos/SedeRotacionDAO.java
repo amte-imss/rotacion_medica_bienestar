@@ -29,9 +29,11 @@ public class SedeRotacionDAO implements DAO{
     SedeRotacion per = (SedeRotacion)obj;    
     Connection cn = BD.getConection();
     String sql;
-    sql = "SELECT a.MTA_CVE, a.ESP_CVE, a.PRD_NUM, a.SDE_CVE_ROT, b.SDE_NOM SDE_NOM_ROT " + //a.SDE_CVE,
-"FROM srm_mta_prg_atn_med_ib_arc a INNER JOIN gra_sde_Cat b ON a.sde_cve_rot=b.sde_Cve " +
-"WHERE a.esp_cve=? AND a.PRD_NUM=? AND a.cup_res>0 "; //a.sde_cve=? AND 
+    sql = "SELECT a.MTA_CVE, a.ESP_CVE, a.PRD_NUM, a.SDE_CVE_ROT, CONCAT(h.EDO_NOM, ' ', g.DEL_NOM, ' - ', b.SDE_NOM) SDE_NOM_ROT " + //a.SDE_CVE,
+            "FROM srm_mta_prg_atn_med_ib_arc a INNER JOIN gra_sde_Cat b ON a.sde_cve_rot=b.sde_Cve " +
+            "INNER JOIN ims_del_cat g ON b.DEL_CVE=g.DEL_CVE " +
+            "INNER JOIN gra_edo_cat h ON g.EDO_CVE=h.EDO_CVE " +
+            "WHERE a.esp_cve=? AND a.PRD_NUM=? AND a.cup_res>0 ORDER BY SDE_NOM_ROT"; //a.sde_cve=? AND 
     PreparedStatement ps = cn.prepareStatement(sql);
     //ps.setInt(1, per.getSDE_CVE());
     ps.setInt(1, per.getESP_CVE());

@@ -27,7 +27,7 @@
     String pagina = "";
     Acceso ac = new Acceso();
     Configuracion cnf = new Configuracion();
-    try {
+    //try {
       if (USU_CVE==null){
         throw new Exception("ACCESO RESTRINGIDO SIN USUARIO");
       }
@@ -170,7 +170,7 @@
                     <option value="0">CAPTURE SEDE</option>
                 <%
                   } else {
-                    if (lstEsp.size()!=1){
+                    if (lstEsp.size()!=0){
                 %>
                     <option value="0"></option>
                 <%
@@ -279,7 +279,7 @@
                             <td><%= lstRes.get(ite).getPER_AP1() %> <%= lstRes.get(ite).getPER_AP2() %> <%= lstRes.get(ite).getPER_NOM() %></td>
                             <td><% if (lstRes.get(ite).getPRD_NUM()!=0) { %><%= lstRes.get(ite).getPRD_NOM() %> <% } %></td>
                             <td><% if (lstRes.get(ite).getPRD_NUM()!=0) { %><%= lstRes.get(ite).getSDE_NOM_ROT()%> <% } %></td>
-                            <td><% if (ac.getPERFIL().equals("CLINICO") || ac.getPERFIL().equals("ADMINISTRADOR")) { if (lstRes.get(ite).getPRD_NUM()==0 ) { %><a href="capturaRotacion.jsp?usu_cve=<%= ac.getUSU_CVE() %>&rcve=<%= lstRes.get(ite).getREG_CVE() %>" target="_self" title="Rotacion de Residente"><span class="glyphicon glyphicon-list-alt"></span></a><% } } %>
+                            <td><% if (ac.getPERFIL().equals("CLINICO") || ac.getPERFIL().equals("JEFE DE DIVISION") || ac.getPERFIL().equals("ADMINISTRADOR")) { if (lstRes.get(ite).getPRD_NUM()==0 ) { %><a href="capturaRotacion.jsp?usu_cve=<%= ac.getUSU_CVE() %>&rcve=<%= lstRes.get(ite).getREG_CVE() %>" target="_self" title="Rotacion de Residente"><span class="glyphicon glyphicon-list-alt"></span></a><% } } %>
                                 <% if (ac.getPERFIL().equals("ADMINISTRADOR")) {
                                     if (lstRes.get(ite).getPRD_NUM()!=0 ) { %><a href="eliminaRotacion?usu_cve=<%= ac.getUSU_CVE() %>&rcve=<%= lstRes.get(ite).getREG_CVE() %>" target="_self" title="Elimina rotacion de Residente"><span class="glyphicon glyphicon-remove"></span></a><% }                                         
                                     }
@@ -302,9 +302,9 @@
     </body>
 </html>
 <%
-    } catch (Exception ex){
+    /*} catch (Exception ex){
       pagina = "error.jsp?e=" + ex.getMessage();
       response.sendRedirect(pagina);
-    }
+    }*/
 
 %>

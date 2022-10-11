@@ -182,7 +182,7 @@ function cRes(){
       }
       cadena += "</td>";
       cadena += "<td class='" + color + "'>";
-      if (residentes[elm].BAN_IMP=="1" && (PERFIL=="ADMINISTRADOR" || PERFIL=="PROFESOR" || PERFIL=="CLINICO")){
+      if (residentes[elm].BAN_IMP=="1" && (PERFIL=="ADMINISTRADOR" || PERFIL=="PROFESOR" || PERFIL=="CLINICO" || PERFIL=="JEFE DE DIVISION")){
         cadena += "<a href='califica.jsp?usu_cve=" + document.getElementById("USU_CVE").value + "&ads_cve=" + residentes[elm].ADS_CVE + "' target='_self' title='Calificar Residente'><span class='glyphicon glyphicon-list-alt'></span></a>&nbsp;";
       }
       if (residentes[elm].BAN_CAL=="1"){

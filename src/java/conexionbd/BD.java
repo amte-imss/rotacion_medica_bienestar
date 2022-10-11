@@ -10,10 +10,14 @@ import java.sql.SQLException;
  */
 public class BD {
 
+    /*private static final String host = "172.22.159.26";
+    private static final String bd = "edumed";
+    private static final String usr = "appCES";
+    private static final String pwd = "C3sD1vPe*";*/
     private static final String host = "127.0.0.1";
-    private static final String bd = "rotacionmedicabienestar";
+    private static final String bd = "edumed";
     private static final String usr = "root";
-    private static final String pwd = "";
+    private static final String pwd = "fantasmon";
     private static final String protocolo = "jdbc:mysql://";
     private static final String driver = "com.mysql.jdbc.Driver";
     

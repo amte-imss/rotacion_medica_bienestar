@@ -34,7 +34,7 @@ public class ResidenteDAO implements DAO{
             + "b.MTA_CVE, c.PRD_NUM, d.SDE_CVE SDE_CVE_ROT, d.SDE_NOM SDE_NOM_ROT, e.del_cve DEL_CVE_ROT, "
             + "CONCAT(f.EDO_NOM,' ',e.DEL_NOM) DEL_NOM_ROT, PRD_NOM, "
             + "(select CONCAT('TEL: ',h.TEL_NUM,', CEL:',h.TEL_EXT_NUM) from gra_per_tel_num_arc h where h.PER_CVE = a.PER_CVE and h.TEL_TIP_CVE = 1 limit 1) TELEFONOS, "
-            + "(select i.EML_URL from gra_per_eml_arc i where i.PER_CVE = a.per_cve and i.eml_tip_cve = 1) CORREO "
+            + "(select GROUP_CONCAT(i.EML_URL) from gra_per_eml_arc i where i.PER_CVE = a.per_cve and i.eml_tip_cve = 1) CORREO "
             + "FROM srm_reg_ads_vis a "
             + "LEFT JOIN srm_atn_med_ib_arc b ON a.REG_CVE=b.REG_CVE " //srm_rot_cmp_arc 
             + "LEFT JOIN srm_mta_prg_atn_med_ib_arc c ON b.mta_cve=c.mta_cve " //srm_mta_prg_rot_cmp_arc

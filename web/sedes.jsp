@@ -85,6 +85,18 @@
     <div class="row" class="col-xs-12 col-sm-12 col-md-12">
         <h2>Sedes</h2>
     </div>
+      <div class="alert alert-success" style="text-align: justify;">
+        <p>Las rotaciones parciales de <strong>Atención Médica IMSS BIENESTAR</strong> se llevarán a cabo de la siguiente manera:</p>
+          <ol>
+              <li>Bajo la normativa institucional.</li>
+              <li>Jornada matutina.</li>
+              <li>Guardias con una periodicidad ABCD.</li>
+              <li>Serán evaluadas por personal del programa IMSS BIENESTAR con el apoyo de la Coordinaciòn Auxiliar Médica de Educación (CAME) del OOAD receptor.</li>
+              <li>Durante la rotación estarán bajo la responsabilidad del programa IMSS BIENESTAR de la CAME receptora.</li>
+              <li>No se autorizan vcaciones durante la rotación parcial.</li>
+              <li>El puntaje solo se otorgará a los que completen la rotación programada.</li>
+          </ol>
+        </div>
       <form role="form" action="" method="post" target="_self" autocomplete="off" class="form-horizontal">
         <input type="hidden" id="USU_CVE" value="<%= ac.getUSU_CVE() %>" />
         <input type="hidden" id="PERFIL" value="<%= ac.getPERFIL() %>" />
@@ -191,9 +203,9 @@
                         <tr>
                             <!--th>DELEGACION</th>
                             <th>SEDE</th-->
-                            <th>ESPECIALIDAD</th>
-                            <th>PERIODO</th>
                             <th>DELEGACION<br>ROTACION</th>
+                            <th>ESPECIALIDAD</th>
+                            <th>PERIODO</th>                            
                             <th>SEDE<br>ROTACION</th>
                             <th>CUPO</th>
                             <th>OCUPADO</th>
@@ -215,9 +227,9 @@
                         <tr>
                             <!-- td><%= lstRes.get(ite).getDEL_NOM() %></td>
                             <td><%= lstRes.get(ite).getSDE_NOM()%></td-->
+                            <td><%= lstRes.get(ite).getDEL_NOM_ROT() %></td>
                             <td><%= lstRes.get(ite).getESP_NOM() %></td>
                             <td><%= lstRes.get(ite).getPRD_NOM() %></td>
-                            <td><%= lstRes.get(ite).getDEL_NOM_ROT() %></td>
                             <td><%= lstRes.get(ite).getSDE_NOM_ROT() %></td>
                             <td><%= lstRes.get(ite).getCUP_AUT() %></td>
                             <td><%= lstRes.get(ite).getCUP_OCU() %></td>

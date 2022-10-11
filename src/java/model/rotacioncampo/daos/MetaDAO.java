@@ -53,7 +53,7 @@ public class MetaDAO implements DAO{
     if (res.getESP_CVE() != 0) {
       sql = sql + "AND a.ESP_cve=? ";
     }
-    sql = sql + "ORDER BY 2, 7, 4, 6"; //2,4,6,11,8,10 
+    sql = sql + "ORDER BY 4, 2, 7, 6"; //2,4,6,11,8,10 
     int itePS=1;
     PreparedStatement ps = cn.prepareStatement(sql);
     ps.setInt(itePS, res.getPRO_ANO());

@@ -203,7 +203,7 @@
                         <div class="clearfix col-md-12">
                             <div class="pull-right">
                                 <%
-                                    if (ac.getPERFIL().equals("CLINICO") || ac.getPERFIL().equals("ADMINISTRADOR")) {
+                                    if (ac.getPERFIL().equals("CLINICO") || ac.getPERFIL().equals("JEFE DE DIVISION") || ac.getPERFIL().equals("ADMINISTRADOR")) {
                                 %>                        
                                 <button class="btn btn-primary" id="guarda" onclick="valida();" type="button">
                                     Guardar

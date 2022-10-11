@@ -137,7 +137,7 @@ function cRes(){
             }
             cadena+="</td>";            
             cadena+="<td>";
-            if (PERFIL=="CLINICO" || PERFIL=="ADMINISTRADOR"){
+            if (PERFIL=="CLINICO" || PERFIL=="JEFE DE DIVISION" || PERFIL=="ADMINISTRADOR"){
                 if (residentes[elm].PRD_NUM=="0") { 
                     cadena+="<a href='capturaRotacion.jsp?usu_cve=" + USU_CVE+ "&rcve=" + residentes[elm].REG_CVE + "' target='_self' title='Rotacion de Residente'><span class='glyphicon glyphicon-list-alt'></span></a>";
                 }
